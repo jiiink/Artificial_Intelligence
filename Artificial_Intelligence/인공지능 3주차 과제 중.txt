@@ -1,0 +1,29 @@
+인공지능 3주차 과제 중
+
+model = transformers.AutoModelForCausalLM.from_pretrained(
+    "microsoft/Phi-3.5-mini-instruct",
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+
+)
+model.enable_input_require_grads()
+tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3.5-mini-instruct")
+
+lora_config = LoraConfig(
+        r=8,
+        lora_alpha=32,
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        lora_dropout=0.05,
+        bias="none",
+        task_type="CAUSAL_LM"
+    )
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+
+저번 과제에서는 lora_alpha=16 이었는데, 이번엔 32 네???
+
+
+
+
+59	0.015300
+60	0.017100

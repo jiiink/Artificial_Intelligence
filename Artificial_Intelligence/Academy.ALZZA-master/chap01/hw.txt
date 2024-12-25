@@ -1,0 +1,6 @@
+# 처음 상태
+LEARNING_RATE = 0.1
+abalone_exec(epoch_count=100, mb_size=100, report=20)
+
+let's change LEARNING_RATE, epoch, mb_size. 
+
